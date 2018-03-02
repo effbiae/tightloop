@@ -1,9 +1,10 @@
 #Tightloop
+
 ##A Challenge to Solve Simple Problems Fast
 
-        produce functions to solve a test in any way
-        must have the same result as the reference
-        need not be the same algorithm as the reference
+        write a program to solve a problem
+        the result must by the same as the reference implementation
+        the program does not have to use the same algorithm as the reference
 
 The first challenges are:
 
@@ -11,28 +12,16 @@ The first challenges are:
   - sort a list
   - shuffle the numbers 0..n-1
 
-The only restriction on the way problems are solved is that problems must
-produce the same checksum as the reference (ref) implementation.  Further, to
-defeat caching results, an int is passed to each solution to seed a
-pseudo-random number generator.  Further, the generator must produce the same
-numbers as the ref.  see [ref.h|ref.h] for the
-generator.
+The reference implementation (ref) has simple solutions for these three
+problems.  See functions tcheck(), tsort(), tshuf() in [ref.c|ref.c].
 
-There are seven types used in the tests.  The tests are run on linux, so it's
-known that these are:
+The tests are run on linux-x64.
 
-
-| Type          | sizeof  | typedef |alias |
-|:------------- |:-------:|:--------|:----:|
-| char          | 1       | int8_t  | G    |
-| short         | 2       | int16_t | H    |
-| int           | 4       | int32_t | I    |
-| long long     | 8       | int64_t | J    |
-| float         | 4       |         | E    |
-| double        | 8       |         | F    |
-| pointer       | 8       |         | *    |
-
-
+All programs must produce a checksum of the result for verification.  The
+checksum is an int and should be written to stdout.
+Further, to defeat result prediction, a seed is passed to each solution for a
+pseudo-random number generator. This generator is used in every test and an
+implementation can be seen here: [ref.h|ref.h].
 
 
 ## Test 0
@@ -53,4 +42,21 @@ sorted list.
 
 Shuffle the numbers 0..n using the Fisher–Yates shuffle
 
-Again, use the generator for the shuffle.
+Again, use the generator for the shuffle and return the checksum
+
+
+
+##Types
+
+There are seven types used in the tests.  On linux-x64, these are:
+
+| Type    | sizeof  | aka     |alias |
+|:------- |:-------:|:--------|:----:|
+| char    | 1       | int8_t  | G    |
+| short   | 2       | int16_t | H    |
+| int     | 4       | int32_t | I    |
+| long    | 8       | int64_t | J    |
+| float   | 4       |         | E    |
+| double  | 8       |         | F    |
+| pointer | 8       |         | *    |
+
