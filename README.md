@@ -1,6 +1,6 @@
-#Tightloop
+# Tightloop
 
-##A Challenge to Solve Simple Problems Fast
+## A Challenge to Solve Simple Problems Fast
 
         write a program to solve a problem
         the result must by the same as the reference implementation
@@ -59,4 +59,5 @@ There are seven types used in the tests.  On linux-x64, these are:
 | float   | 4       |         | E    |
 | double  | 8       |         | F    |
 | pointer | 8       |         | *    |
+
 
