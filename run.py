@@ -30,7 +30,4 @@ def reach(exe,test):
   return (n if n<32 and not rc else -1,t,seed,r)
 
 
-print(reach('./ref',0))
-print(reach('./ref',1))
-print(reach('./ref',2))
-#[lambda x:print(reach('./ref',x)) for x in range(3)]
+[print(reach('./ref',x)) for x in range(3)]
