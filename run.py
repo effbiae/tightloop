@@ -16,12 +16,9 @@ def reach(exe,test):
       p.kill()
       (o,e)=p.communicate()
       return 0
-    print(o);print(e)
     rc=p.returncode
     if rc!=0:break
-    print(o)
     r=int(fullmatch(b'[0-9]+\n',o).group(0))
-    #print("n=",n,p.stdout)
     b=b'([0-9.:]+)[^ ]* '
     t,u,s=[float(x) for x in ((match(b+b+b[:-1],e).group(1,2,3)))]
     if t>1:break
