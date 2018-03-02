@@ -1,6 +1,6 @@
 # Tightloop
 
-## A Challenge to Solve Simple Problems Fast
+## A Challenge to Code Simple Problems Efficiently
 
         write a program to solve a problem
         the result must by the same as the reference implementation
