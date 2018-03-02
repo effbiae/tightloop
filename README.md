@@ -13,7 +13,7 @@ The first challenges are:
   - shuffle the numbers 0..n-1
 
 The reference implementation (ref) has simple solutions for these three
-problems.  See functions tcheck(), tsort(), tshuf() in [ref.c|ref.c].
+problems.  See functions tcheck(), tsort(), tshuf() in [ref.c](ref.c).
 
 The tests are run on linux-x64.
 
@@ -21,7 +21,7 @@ All programs must produce a checksum of the result for verification.  The
 checksum is an int and should be written to stdout.
 Further, to defeat result prediction, a seed is passed to each solution for a
 pseudo-random number generator. This generator is used in every test and an
-implementation can be seen here: [ref.h|ref.h].
+implementation can be seen here: [ref.h](ref.h).
 
 
 ## Test 0
@@ -46,7 +46,7 @@ Again, use the generator for the shuffle and return the checksum
 
 
 
-##Types
+## Types
 
 There are seven types used in the tests.  On linux-x64, these are:
 
