@@ -1,7 +1,6 @@
-//gcc -O3 -fomit-frame-pointer -march=native jfa.c -o jfa
 #include<stdlib.h>
 #include<stdio.h>
-#include"../ref.h"
+#include<ref.h>
 
 //BSD checksum on char* and int*
 static int csum1 (char *p, int nr);
