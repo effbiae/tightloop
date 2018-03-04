@@ -27,7 +27,7 @@ def reach(exe,test):
     t,u,s=[float(x) for x in ((match(b+b+b[:-1],e).group(1,2,3)))]
     if t>1:break
     n+=1
-  return (n if n<32 and not rc else -1,t,seed,r)
+  return (test,n if n<32 and not rc else -1,seed,r,t)
 
-
+print('test','n','seed','result','time')
 [print(reach('./ref',x)) for x in range(3)]
