@@ -54,7 +54,7 @@ def tim(exe,test,n,seed):
   except Exception:
     print(e)
     raise Exception("match")
-  return [exe,test,n if n<32 and not rc else -1,seed,r,t]
+  return [exe,test,n if not rc else -1,seed,r,t]
 def ti(pre,test,n,seed):
   x="./ref" if pre=="ref" else './contrib/'+pre+'/'+pre
   return [pre]+tim(x,test,n,seed)[1:]
@@ -85,8 +85,13 @@ c.execute('create table t(exe,test,n,seed,result,time)')
 def tins(x):return c.executemany("insert into t values(?,?,?,?,?,?)",x)
 tins(T)
 tab(c)
+c.execute('create table r as select distinct test,result from t')
+
 
 t=['jfa','cpp']
 U=([[[x]+ti(*[x]+r[1:4])[1:]for r in r]for x in t*3])
 tins(raze(U))
+c.execute('create table f as select * from t except select * from t natural join r')
+c.execute('create table x as select exe from f group by exe')
+c.execute('delete from t where exe in (select * from x)')
 tab(c,'select exe,gmean(time)as gm from (select exe,test,median(time) as time from t group by exe,test) group by exe order by gm')
