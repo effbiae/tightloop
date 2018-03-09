@@ -61,3 +61,14 @@ There are seven types used in the tests.  On linux-x64, these are:
 | pointer | 8       |         | *    |
 
 
+## Results
+
+Currently jfa beats the reference implementation
+
+    +-----+-------+
+    | exe |  time |
+    +-----+-------+
+    | jfa | 0.144 |
+    | ref | 0.178 |
+    +-----+-------+
+
