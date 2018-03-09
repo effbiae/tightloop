@@ -27,16 +27,16 @@ conn.create_function("pow10",1,lambda x:math.pow(10,x))
 c = conn.cursor()
 
 g=0
-optlist, args = getopt(argv[1:], 'r:o:')
-oo=dict(r=1,o=7)
+optlist, args = getopt(argv[1:], 'r:o:g:')
+oo=dict(r=0.1,o=2,g=0)
 oo.update(dict([(x[0][1],float(x[1])) for x in optlist]))
-print(oo)
 
 #tim - find the time and result given exe, test, n and seed
 def tim(exe,test,n,seed):
   t=-1;rc=-1;r=0
   env=dict(os.environ,TIMEFORMAT='%R %U %S')
   cmd=' '.join(['time',exe,str(test),str(n),str(seed)])
+  if oo['g']:print(cmd)
   p=Popen([cmd], stdout=PIPE, stderr=PIPE, shell=True, executable="/bin/bash",env=env)
   try:
     (o,e)=p.communicate(timeout=oo['o'])
@@ -84,7 +84,7 @@ T=raze([[ti(*x[:4]) for a in range(3)]for x in r])
 c.execute('create table t(exe,test,n,seed,result,time)')
 def tins(x):return c.executemany("insert into t values(?,?,?,?,?,?)",x)
 tins(T)
-tab(c)
+#tab(c,'select exe,test,n,median(time) as time from t group by exe,test,n')
 c.execute('create table r as select distinct test,result from t')
 
 
@@ -94,4 +94,5 @@ tins(raze(U))
 c.execute('create table f as select * from t except select * from t natural join r')
 c.execute('create table x as select exe from f group by exe')
 c.execute('delete from t where exe in (select * from x)')
-tab(c,'select exe,gmean(time)as gm from (select exe,test,median(time) as time from t group by exe,test) group by exe order by gm')
+tab(c,'select exe,test,round(time,3)as time from (select exe,test,median(time) as time from t group by exe,test) order by test,time')
+tab(c,'select exe,round(gmean(time),3)as gm from (select exe,test,median(time) as time from t group by exe,test) group by exe order by gm')
